@@ -17,17 +17,18 @@
 
 	$pdo = new PDO($dsn, $db_user, $db_password, $options);
 
-	$sql = "INSERT INTO comments (name, text) VALUES (:name, :text)";
+	$sql = "INSERT INTO comments (name, text, date) VALUES (:name, :text, :date)";
 
 	$statement = $pdo->prepare($sql);
 
 	$statement->bindParam(':name', $name);
 	$statement->bindParam(':text', $text);
+	$statement->bindParam(':date', $date);
 	$name = $_POST['name'];
 	$text = $_POST['text'];
+	$date = date("d/m/Y");
 	$statement->execute();
 
 	header('Location: /index.php');
 
-	var_dump($_POST);
 ?>

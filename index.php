@@ -79,19 +79,50 @@
                             	]
                             ?>
 
+                            <?php
+									$driver = 'mysql'; // тип базы данных, с которой мы будем работать
+
+									$host = 'localhost';// альтернатива '127.0.0.1' - адрес хоста, в нашем случае локального
+
+									$db_name = 'projectphp1'; // имя базы данных
+
+									$db_user = 'root'; // имя пользователя для базы данных
+
+									$db_password = ''; // пароль пользователя
+
+									$charset = 'utf8'; // кодировка по умолчанию
+
+									$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]; // массив с дополнительными настройками подключения. В данном примере мы установили отображение ошибок, связанных с базой данных, в виде исключений
+
+									$dsn = "$driver:host=$host;dbname=$db_name;charset=$charset";
+
+									$pdo = new PDO($dsn, $db_user, $db_password, $options);
+
+									$sql = "SELECT * FROM comments where id > 0";
+
+									$statement = $pdo->prepare($sql);
+
+									$statement->execute();
+
+									$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+									var_dump($result);
+
+							?>
+
                             <div class="card-body">
                               <div class="alert alert-success" role="alert">
                                 Комментарий успешно добавлен
                               </div>
 
-                              <?php foreach ($comments as $comment): ?>
+                              <?php foreach ($result as $comment): ?>
                                 <div class="media">
-                                  <img src="<?php echo $comment['userimg']; ?>" class="mr-3" alt="..." width="64" height="64">
+                                  <img src="<?php echo 'img/no-user.jpg'; ?>" class="mr-3" alt="..." width="64" height="64">
                                   <div class="media-body">
-                                    <h5 class="mt-0"><?php echo $comment['username']; ?></h5>
-                                    <span><small><?php echo $comment['userdate']; ?></small></span>
+                                    <h5 class="mt-0"><?php echo $comment['name']; ?></h5>
+                                    <span><small><?php echo $comment['date']; ?></small></span>
                                     <p>
-                                        <?php echo $comment['usercomments']; ?>
+                                        <?php echo $comment['text']; ?>
                                     </p>
                                   </div>
                                 </div>
