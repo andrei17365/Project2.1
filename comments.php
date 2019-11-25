@@ -17,16 +17,16 @@
 
 	$pdo = new PDO($dsn, $db_user, $db_password, $options);
 
-	$sql = "INSERT INTO comments (name, text, date) VALUES (:name, :text, :date)";
+	$sql = "INSERT INTO comments (name, text) VALUES (:name, :text)";
 
 	$statement = $pdo->prepare($sql);
 
 	$statement->bindParam(':name', $name);
 	$statement->bindParam(':text', $text);
-	$statement->bindParam(':date', $date);
+
 	$name = $_POST['name'];
 	$text = $_POST['text'];
-	$date = date("d/m/Y");
+
 	$statement->execute();
 	session_start();
 	$_SESSION['newcomment'] = 'Ваш коментарий успешно добавлен';
