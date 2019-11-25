@@ -52,34 +52,6 @@
                             <div class="card-header"><h3>Комментарии</h3></div>
 
                             <?php
-                            	$comments = [
-                            		['userid' => 1,
-                            		 'userimg' => 'img/no-user.jpg',
-                            		 'username' => 'Vasja',
-                            		 'userdate' => '12/10/2019',
-                            		 'usercomments' => 'Alles kuken kvaken!!!!!!!!!!!'],
-
-                            		 ['userid' => 2,
-                            		 'userimg' => 'img/no-user.jpg',
-                            		 'username' => 'Petja',
-                            		 'userdate' => '13/10/2019',
-                            		 'usercomments' => 'Всем привет!'],
-
-                            		 ['userid' => 3,
-                            		 'userimg' => 'img/no-user.jpg',
-                            		 'username' => 'Moisha',
-                            		 'userdate' => '14/10/2019',
-                            		 'usercomments' => 'Hello, world!'],
-
-                            		 ['userid' => 4,
-                            		 'userimg' => 'img/no-user.jpg',
-                            		 'username' => 'Oslinaja Jopa',
-                            		 'userdate' => '15/10/2019',
-                            		 'usercomments' => 'Какой чудесный день!']
-                            	]
-                            ?>
-
-                            <?php
 									$driver = 'mysql'; // тип базы данных, с которой мы будем работать
 
 									$host = 'localhost';// альтернатива '127.0.0.1' - адрес хоста, в нашем случае локального
@@ -105,9 +77,6 @@
 									$statement->execute();
 
 									$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-									var_dump($result);
-
 							?>
 
                             <div class="card-body">
