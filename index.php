@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,12 +79,17 @@
 									$statement->execute();
 
 									$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
 							?>
 
                             <div class="card-body">
+
+                            <?php if (isset($_SESSION['newcomment'])){?>
                               <div class="alert alert-success" role="alert">
-                                Комментарий успешно добавлен
+                                <?php echo $_SESSION['newcomment']; ?>
                               </div>
+                            <?php unset($_SESSION['newcomment']); }?>
+
 
                               <?php foreach ($result as $comment): ?>
                                 <div class="media">

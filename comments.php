@@ -28,7 +28,8 @@
 	$text = $_POST['text'];
 	$date = date("d/m/Y");
 	$statement->execute();
-
+	session_start();
+	$_SESSION['newcomment'] = 'Ваш коментарий успешно добавлен';
 	header('Location: /index.php');
 
 ?>
