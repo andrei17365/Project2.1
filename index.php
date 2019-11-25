@@ -96,7 +96,7 @@
                                   <img src="<?php echo 'img/no-user.jpg'; ?>" class="mr-3" alt="..." width="64" height="64">
                                   <div class="media-body">
                                     <h5 class="mt-0"><?php echo $comment['name']; ?></h5>
-                                    <span><small><?php echo $comment['date']; ?></small></span>
+                                    <span><small><?php echo date("d/m/Y", strtotime($comment['date'])); ?></small></span>
                                     <p>
                                         <?php echo $comment['text']; ?>
                                     </p>
