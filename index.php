@@ -72,7 +72,7 @@
 
 									$pdo = new PDO($dsn, $db_user, $db_password, $options);
 
-									$sql = "SELECT * FROM comments WHERE id > 0 ORDER BY id DESC";
+									$sql = "SELECT * FROM comments ORDER BY id DESC";
 
 									$statement = $pdo->prepare($sql);
 

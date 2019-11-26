@@ -29,7 +29,17 @@
 
 	$statement->execute();
 	session_start();
-	$_SESSION['newcomment'] = 'Ваш коментарий успешно добавлен';
+
+	if (!empty($_POST['name']) && !empty($_POST['text'])){
+		$_SESSION['newcomment'] = 'Ваш коментарий успешно добавлен';
+		$statement->execute();
+	} elseif (empty($_POST['name']) && empty($_POST['text'])) {
+		$_SESSION['newcomment'] = 'Введите имя и сообщение';
+	} elseif (empty($_POST['name'])) {
+		$_SESSION['newcomment'] = 'Введите имя';
+	} else {
+		$_SESSION['newcomment'] = 'Введите сообщение';
+	}
 	header('Location: /index.php');
 
 ?>
