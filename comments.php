@@ -27,7 +27,6 @@
 	$name = $_POST['name'];
 	$text = $_POST['text'];
 
-	$statement->execute();
 	session_start();
 
 	if (!empty($_POST['name']) && !empty($_POST['text'])){
