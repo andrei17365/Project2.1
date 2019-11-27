@@ -23,7 +23,7 @@
 
 	$name = $_POST['name_new_user'];
 	$email = $_POST['email'];
-	$password = $_POST['password'];
+	$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 	$statement->bindParam(':name', $name);
 	$statement->bindParam(':email', $email);
