@@ -1,4 +1,6 @@
 <?php
+	session_start();
+
 	$driver = 'mysql'; // тип базы данных, с которой мы будем работать
 
 	$host = 'localhost';// альтернатива '127.0.0.1' - адрес хоста, в нашем случае локального
@@ -24,24 +26,46 @@
 	$name = $_POST['name_new_user'];
 	$email = $_POST['email'];
 	$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-	$statement->bindParam(':name', $name);
-	$statement->bindParam(':email', $email);
-	$statement->bindParam(':password', $password);
-	$statement->execute();
+	$pass_conf = $_POST['password_confirmation'];
 
 
-	/*session_start();
 
-	if (!empty($_POST['name']) && !empty($_POST['text'])){
-		$_SESSION['newcomment'] = 'Ваш коментарий успешно добавлен';
+	if (empty($name)){
+		$_SESSION['name_err'] = 'Введите имя';
+	}
+	if (empty($email)){
+		$_SESSION['email_err'] = 'Введите адрес почтового ящика';
+	}
+	if (!empty($email)){
+		if(!(filter_var($email, FILTER_VALIDATE_EMAIL))){
+			$_SESSION['email_err'] = 'Формат почтового ящика неправильный';
+		}
+	}
+	if (empty($password)){
+		$_SESSION['pass_err'] = 'Введите пароль';
+	}
+	if (!empty($_POST['password']) & strlen($_POST['password'])<6){
+		$_SESSION['pass_err'] = 'Длина пароля должна быть не менее 6-ти символов';
+	}
+	if (empty($pass_conf)){
+		$_SESSION['passconf_err'] = 'Подтвердите пароль';
+	}
+	if (!empty($pass_conf)){
+		if (!(password_verify($pass_conf, $password))){
+			$_SESSION['passconf_err'] = 'Пароли не совпадают';
+		}
+	}
+
+
+	if ((!empty($_SESSION['name_err'])) or (!empty($_SESSION['email_err'])) or (!empty($_SESSION['pass_err'])) or (!empty($_SESSION['passconf_err']))){
+		header('Location: /register.php');
+	}
+	else {
+		$statement->bindParam(':name', $name);
+		$statement->bindParam(':email', $email);
+		$statement->bindParam(':password', $password);
 		$statement->execute();
-	} elseif (empty($_POST['name']) && empty($_POST['text'])) {
-		$_SESSION['newcomment'] = 'Введите имя и сообщение';
-	} elseif (empty($_POST['name'])) {
-		$_SESSION['newcomment'] = 'Введите имя';
-	} else {
-		$_SESSION['newcomment'] = 'Введите сообщение';
-	}*/
-	header('Location: /index.php');
+		header('Location: /index.php');
+	}
+
 ?>

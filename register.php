@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,33 +58,76 @@
                                     <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
+                                        <?php if (isset($_SESSION['name_err'])){?>
+										<div class="col-md-6">
+                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name_new_user" autofocus>
+
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong><?php echo $_SESSION['name_err']; ?></strong>
+                                                </span>
+                                        </div>
+                                        <?php unset($_SESSION['name_err']); } else {?>
                                         <div class="col-md-6">
                                             <input id="name" type="text" class="form-control" name="name_new_user" autofocus>
                                         </div>
+                                        <?php } ?>
                                     </div>
+
 
                                     <div class="form-group row">
                                         <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
 
+										 <?php if (isset($_SESSION['email_err'])){?>
+										<div class="col-md-6">
+                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" autofocus>
+
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong><?php echo $_SESSION['email_err']; ?></strong>
+                                                </span>
+                                        </div>
+                                        <?php unset($_SESSION['email_err']); } else {?>
                                         <div class="col-md-6">
                                             <input id="email" type="email" class="form-control" name="email" >
                                         </div>
+                                        <?php } ?>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
 
+										<?php if (isset($_SESSION['pass_err'])){?>
+										<div class="col-md-6">
+                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autofocus>
+
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong><?php echo $_SESSION['pass_err']; ?></strong>
+                                                </span>
+                                        </div>
+                                        <?php unset($_SESSION['pass_err']); } else {?>
+
                                         <div class="col-md-6">
                                             <input id="password" type="password" class="form-control " name="password"  autocomplete="new-password">
                                         </div>
+                                        <?php } ?>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
 
+                                        <?php if (isset($_SESSION['passconf_err'])){?>
+										<div class="col-md-6">
+                                            <input id="password-confirm" type="password" class="form-control @error('password-confirm') is-invalid @enderror" name="password_confirmation" autofocus>
+
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong><?php echo $_SESSION['passconf_err']; ?></strong>
+                                                </span>
+                                        </div>
+                                        <?php unset($_SESSION['passconf_err']); } else {?>
+
                                         <div class="col-md-6">
                                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password">
                                         </div>
+                                        <?php } ?>
                                     </div>
 
                                     <div class="form-group row mb-0">
