@@ -19,9 +19,7 @@
 
 	$pdo = new PDO($dsn, $db_user, $db_password, $options);
 
-	$sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
 
-	$statement = $pdo->prepare($sql);
 
 	$name = $_POST['name_new_user'];
 	$email = $_POST['email'];
@@ -39,6 +37,14 @@
 	if (!empty($email)){
 		if(!(filter_var($email, FILTER_VALIDATE_EMAIL))){
 			$_SESSION['email_err'] = 'Формат почтового ящика неправильный';
+		} else {
+			$sql = "SELECT * FROM users WHERE email = :email";
+			$statement = $pdo->prepare($sql);
+			$statement->bindParam(':email', $email);
+			$statement->execute();
+			if ($statement!==null){
+				$_SESSION['email_err'] = 'Почтовый ящик с таким именем занят';
+			}
 		}
 	}
 	if (empty($password)){
@@ -61,6 +67,8 @@
 		header('Location: /register.php');
 	}
 	else {
+		$sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
+		$statement = $pdo->prepare($sql);
 		$statement->bindParam(':name', $name);
 		$statement->bindParam(':email', $email);
 		$statement->bindParam(':password', $password);

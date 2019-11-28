@@ -68,7 +68,7 @@
                                         </div>
                                         <?php unset($_SESSION['name_err']); } else {?>
                                         <div class="col-md-6">
-                                            <input id="name" type="text" class="form-control" name="name_new_user" autofocus>
+                                            <input id="name" type="text" class="form-control" name="name_new_user" value="<?php $_POST['name_new_user'] ?>" autofocus>
                                         </div>
                                         <?php } ?>
                                     </div>
