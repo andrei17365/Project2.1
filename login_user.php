@@ -19,17 +19,32 @@
 
 	$pdo = new PDO($dsn, $db_user, $db_password, $options);
 
-
-
-	$email = $_POST['email'];
-	$password = $_POST['password'];
+	if(isset($_COOKIE['email_login']) & isset($_COOKIE['pass_login'])){
+		$email = $_COOKIE['email_login'];
+		$password = $_COOKIE['pass_login'];
+		$_POST['remember'] = 1;
+	} else {
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+	}
+	if ($_POST['remember'] == 1) {
+			setcookie('email_login', $email, time() + 3600);
+			setcookie('pass_login', $password, time() + 3600);
+		} else {
+			setcookie('email_login', '', time());
+			setcookie('pass_login', '', time());
+		}
 
 	if (empty($email)){
 		$_SESSION['email_login_err'] = 'Введите адрес почтового ящика';
+		setcookie('email_login', '', time());
+		setcookie('pass_login', '', time());
 	}
 	if (!empty($email)){
 		if(!(filter_var($email, FILTER_VALIDATE_EMAIL))){
 			$_SESSION['email_login_err'] = 'Формат почтового ящика неправильный';
+			setcookie('email_login', '', time());
+			setcookie('pass_login', '', time());
 		}
 		else {
 			$sql = "SELECT * FROM users WHERE email = :email";
@@ -39,13 +54,19 @@
 			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 			if ($result==null){
 				$_SESSION['email_login_err'] = 'Пользователя с таким почтовым ящиком не зарегистрировано';
+				setcookie('email_login', '', time());
+				setcookie('pass_login', '', time());
 			}
 			else {
 				if (empty($password)){
 					$_SESSION['pass_login_err'] = 'Введите пароль';
+					setcookie('email_login', '', time());
+					setcookie('pass_login', '', time());
 				}
 				elseif (!(password_verify($password, $result[0]['password']))){
 					$_SESSION['pass_login_err'] = 'Пароль не совпадает';
+					setcookie('email_login', '', time());
+					setcookie('pass_login', '', time());
 				}
 			}
 		}

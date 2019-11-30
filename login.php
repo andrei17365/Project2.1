@@ -1,6 +1,8 @@
-<?php
+<?php if(isset($_COOKIE['email_login']) & isset($_COOKIE['pass_login'])){
+		header('Location: /login_user.php');
+} else {
 	session_start();
-?>
+	?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,7 +56,7 @@
                         <div class="card">
                             <div class="card-header">Login</div>
 
-                            <div class="card-body">
+							<div class="card-body">
                                 <form method="POST" action="login_user.php">
 
                                     <div class="form-group row">
@@ -94,7 +96,8 @@
                                     <div class="form-group row">
                                         <div class="col-md-6 offset-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="remember" id="remember" >
+                                            	<input class="form-check-input" type="hidden" name="remember" id="remember" value="0" >
+                                                <input class="form-check-input" type="checkbox" name="remember" id="remember" value="1" >
 
                                                 <label class="form-check-label" for="remember">
                                                     Remember Me
@@ -112,6 +115,7 @@
                                     </div>
                                 </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -120,3 +124,4 @@
     </div>
 </body>
 </html>
+<?php } ?>
