@@ -19,6 +19,8 @@
 
 	$pdo = new PDO($dsn, $db_user, $db_password, $options);
 
+	$_SESSION['authorization'] = false;
+
 	if(isset($_COOKIE['email_login']) & isset($_COOKIE['pass_login'])){
 		$email = $_COOKIE['email_login'];
 		$password = $_COOKIE['pass_login'];
@@ -78,6 +80,8 @@
 	else {
 		$_SESSION['email_login'] = $email;
 		$_SESSION['pass_login'] = $password;
+		$_SESSION['authorization'] = true;
+		$_SESSION['name_login'] = $result[0]['name'];
 		header('Location: /index.php');
 	}
 

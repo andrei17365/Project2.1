@@ -35,12 +35,18 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                            <?php if(isset($_SESSION['authorization']) & $_SESSION['authorization']) {?>
+							<li class="nav-item">
+                                <a class="nav-link" href="logout.php">Выйти</a>
+                            </li>
+                            <?php } else { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="login.php">Login</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="register.php">Register</a>
                             </li>
+                            <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -108,7 +114,8 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12" style="margin-top: 20px;">
+                    <?php if(isset($_SESSION['authorization']) & $_SESSION['authorization']) {?>
+					<div class="col-md-12" style="margin-top: 20px;">
                         <div class="card">
                             <div class="card-header"><h3>Оставить комментарий</h3></div>
 
@@ -127,6 +134,22 @@
                             </div>
                         </div>
                     </div>
+
+                    <?php } else { ?>
+                    <div class="col-md-12" style="margin-top: 20px;">
+                        <div class="card">
+                            <div class="card-header"><h3>Вы не можете оставлять комментарии</h3></div>
+								<div class="card-body">
+									<li class="nav-item">
+	                                <a class="nav-link" href="login.php">Login</a>
+	                            	</li>
+	                            	<li class="nav-item">
+	                                <a class="nav-link" href="register.php">Register</a>
+	                            	</li>
+                            	</div>
+                        </div>
+                    </div>
+					<?php } ?>
                 </div>
             </div>
         </main>
