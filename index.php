@@ -78,7 +78,7 @@
 
 									$pdo = new PDO($dsn, $db_user, $db_password, $options);
 
-									$sql = "SELECT * FROM comments ORDER BY id DESC";
+									$sql = "SELECT comments.id as comments_id, comments.text as comments_text, comments.date as comments_date, comments.user_id as comments_user_id, users.id as users_id, users.name as users_name, users.email as users_email, users.password as users_password FROM comments LEFT JOIN users ON users.id=comments.user_id ORDER BY comments.id DESC";
 
 									$statement = $pdo->prepare($sql);
 
@@ -101,10 +101,10 @@
                                 <div class="media">
                                   <img src="<?php echo 'img/no-user.jpg'; ?>" class="mr-3" alt="..." width="64" height="64">
                                   <div class="media-body">
-                                    <h5 class="mt-0"><?php echo $comment['name']; ?></h5>
-                                    <span><small><?php echo date("d/m/Y", strtotime($comment['date'])); ?></small></span>
+                                    <h5 class="mt-0"><?php echo $comment['users_name']; ?></h5>
+                                    <span><small><?php echo date("d/m/Y", strtotime($comment['comments_date'])); ?></small></span>
                                     <p>
-                                        <?php echo $comment['text']; ?>
+                                        <?php echo $comment['comments_text']; ?>
                                     </p>
                                   </div>
                                 </div>
@@ -121,10 +121,10 @@
 
                             <div class="card-body">
                                 <form action="comments.php" method="post">
-                                    <div class="form-group">
+                                 <!--   <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Имя</label>
                                     <input name="name" class="form-control" id="exampleFormControlTextarea1" />
-                                  </div>
+                                  	</div> -->
                                   <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Сообщение</label>
                                     <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
