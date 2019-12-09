@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	$driver = 'mysql'; // тип базы данных, с которой мы будем работать
 
 	$host = 'localhost';// альтернатива '127.0.0.1' - адрес хоста, в нашем случае локального
@@ -17,25 +18,23 @@
 
 	$pdo = new PDO($dsn, $db_user, $db_password, $options);
 
-	$sql = "INSERT INTO comments (name, text) VALUES (:name, :text)";
+	$sql = "INSERT INTO comments (text, user_id) VALUES (:text, :user_id)";
+
+	$user_id = $_SESSION['id_login'];
+	$text = $_POST['text'];
 
 	$statement = $pdo->prepare($sql);
 
-	$statement->bindParam(':name', $name);
+	$statement->bindParam(':user_id', $user_id);
 	$statement->bindParam(':text', $text);
 
-	$name = $_POST['name'];
-	$text = $_POST['text'];
 
-	session_start();
 
-	if (!empty($_POST['name']) && !empty($_POST['text'])){
+
+
+	if (!empty($_POST['text'])){
 		$_SESSION['newcomment'] = 'Ваш коментарий успешно добавлен';
 		$statement->execute();
-	} elseif (empty($_POST['name']) && empty($_POST['text'])) {
-		$_SESSION['newcomment'] = 'Введите имя и сообщение';
-	} elseif (empty($_POST['name'])) {
-		$_SESSION['newcomment'] = 'Введите имя';
 	} else {
 		$_SESSION['newcomment'] = 'Введите сообщение';
 	}

@@ -37,6 +37,9 @@
                         <!-- Authentication Links -->
                             <?php if(isset($_SESSION['authorization']) & $_SESSION['authorization']) {?>
 							<li class="nav-item">
+                                <a class="nav-link" href="profile.php">Редактировать профиль</a>
+                            </li>
+							<li class="nav-item">
                                 <a class="nav-link" href="logout.php">Выйти</a>
                             </li>
                             <?php } else { ?>

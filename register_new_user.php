@@ -25,6 +25,7 @@
 	$email = $_POST['email'];
 	$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 	$pass_conf = $_POST['password_confirmation'];
+	$image = 'no-user';
 
 
 
@@ -42,7 +43,8 @@
 			$statement = $pdo->prepare($sql);
 			$statement->bindParam(':email', $email);
 			$statement->execute();
-			if ($statement!==null){
+			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+			if (isset($result[0]['email'])){
 				$_SESSION['email_err'] = 'Почтовый ящик с таким именем занят';
 			}
 		}
@@ -67,13 +69,16 @@
 		header('Location: /register.php');
 	}
 	else {
-		$sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
+		$sql = "INSERT INTO users (name, email, password, image) VALUES (:name, :email, :password, :image)";
 		$statement = $pdo->prepare($sql);
 		$statement->bindParam(':name', $name);
 		$statement->bindParam(':email', $email);
 		$statement->bindParam(':password', $password);
+		$statement->bindParam(':image', $image);
 		$statement->execute();
 		header('Location: /index.php');
 	}
+//	var_dump($result);
 
+//	var_dump($_SESSION);
 ?>
