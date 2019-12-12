@@ -140,27 +140,66 @@
                         <div class="card-header"><h3>Безопасность</h3></div>
 
                         <div class="card-body">
+
+							<? if ((!isset($_SESSION['current_pass_err'])) & (!isset($_SESSION['new_pass_err'])) & (!isset($_SESSION['new_pass_conf_err']))){?>
                             <div class="alert alert-success" role="alert">
                                 Пароль успешно обновлен
                             </div>
+							<? } ?>
 
-                            <form action="/profile/password" method="post">
+
+                            <form action="edit_profile_password.php" method="post">
                                 <div class="row">
                                     <div class="col-md-8">
+
+
                                         <div class="form-group">
+                                        	<? if (isset($_SESSION['current_pass_err'])){ ?>
+                                        	<label for="exampleFormControlInput1">Current password</label>
+                                            <input type="password" class="form-control is-invalid" name="current" class="form-control" id="exampleFormControlInput1">
+                                            <span class="text text-danger">
+                                                	<? echo $_SESSION['current_pass_err'];?>
+                                            </span>
+                                            <? unset($_SESSION['current_pass_err']);} else { ?>
+
                                             <label for="exampleFormControlInput1">Current password</label>
                                             <input type="password" name="current" class="form-control" id="exampleFormControlInput1">
+                                            <? } ?>
                                         </div>
 
+
+
                                         <div class="form-group">
+											<? if (isset($_SESSION['new_pass_err'])){ ?>
+											<label for="exampleFormControlInput1">New password</label>
+                                            <input type="password" class="form-control is-invalid" name="password" class="form-control" id="exampleFormControlInput1">
+                                            <span class="text text-danger">
+                                                	<? echo $_SESSION['new_pass_err'];?>
+                                            </span>
+                                            <? unset($_SESSION['new_pass_err']);} else { ?>
+
                                             <label for="exampleFormControlInput1">New password</label>
                                             <input type="password" name="password" class="form-control" id="exampleFormControlInput1">
+                                            <? } ?>
                                         </div>
 
+
+
                                         <div class="form-group">
+											<? if (isset($_SESSION['new_pass_conf_err'])){ ?>
+											<label for="exampleFormControlInput1">Password confirmation</label>
+                                            <input type="password" class="form-control is-invalid" name="password_confirmation" class="form-control" id="exampleFormControlInput1">
+                                            <span class="text text-danger">
+                                                	<? echo $_SESSION['new_pass_conf_err'];?>
+                                            </span>
+                                            <? unset($_SESSION['new_pass_conf_err']);} else { ?>
+
                                             <label for="exampleFormControlInput1">Password confirmation</label>
                                             <input type="password" name="password_confirmation" class="form-control" id="exampleFormControlInput1">
+                                            <? } ?>
                                         </div>
+
+
 
                                         <button class="btn btn-success">Submit</button>
                                     </div>
