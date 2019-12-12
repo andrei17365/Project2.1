@@ -25,7 +25,7 @@
 	$email = $_POST['email'];
 	$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 	$pass_conf = $_POST['password_confirmation'];
-	$image = 'no-user';
+	$image = 'no-user.jpg';
 
 
 

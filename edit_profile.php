@@ -19,30 +19,30 @@
 
 	$pdo = new PDO($dsn, $db_user, $db_password, $options);
 
+	unset($_SESSION['email_edit_err']);
+	unset($_SESSION['name_edit_err']);
+	unset($_SESSION['image_edit_err']);
 
 
+	$name = $_SESSION['name_login'];
+	$email = $_SESSION['email_login'];
+	$id = $_SESSION['id_login'];
+	$image = $_SESSION['image_login'];
 
-	$name = $_POST['name'];
-	$email = $_POST['email'];
-	$image = $_FILES['image'];
-	$image_user = 'no-user.jpg';
-		$sql = "SELECT * FROM users WHERE email = :email";
-		$statement = $pdo->prepare($sql);
-		$statement->bindParam(':email', $email);
-		$statement->execute();
-		$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-	$id = $result[0]['id'];
+	$new_name = $_POST['name'];
+	$new_email = $_POST['email'];
 
-	if (empty($name)){
+
+	if (empty($new_name)){
 		$_SESSION['name_edit_err'] = 'Введите имя';
 	}
-	if (empty($email)){
+	if (empty($new_email)){
 		$_SESSION['email_edit_err'] = 'Введите адрес почтового ящика';
 	}
-	if (!empty($email)){
-		if(!(filter_var($email, FILTER_VALIDATE_EMAIL))){
+	if (!empty($new_email)){
+		if(!(filter_var($new_email, FILTER_VALIDATE_EMAIL))){
 			$_SESSION['email_edit_err'] = 'Формат почтового ящика неправильный';
-		} elseif ($email != $_SESSION['email_login']){
+		} elseif ($new_email != $email){
 			$sql = "SELECT * FROM users WHERE email = :email";
 			$statement = $pdo->prepare($sql);
 			$statement->bindParam(':email', $email);
@@ -54,63 +54,71 @@
 		}
 	}
 
-	if (empty($image)){
-		$sql = "SELECT * FROM users WHERE email = :email";
-		$statement = $pdo->prepare($sql);
-		$statement->bindParam(':email', $email);
-		$statement->execute();
-		$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-		$image_user = $result[0]['image'];
+	if (empty($_FILES['image']['name'])){
+		$new_image = $image;
+
+//		echo $new_image.'<br>';
 	}
-	elseif ($image!==$image_user) {
-		if (can_upload_image($image) == true){
-			$sql = "SELECT * FROM users WHERE email = :email";
-			$statement = $pdo->prepare($sql);
-			$statement->bindParam(':email', $email);
-			$statement->execute();
-			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-			$img_del = $result[0]['image'];
-			unlink('img/'.$img_del);
+	else {
+		if (can_upload_image() == true){
+			if(strcmp($image, 'no-user.jpg')==1){
+				unlink('img/'.$image);
+			}
+			$new_image = uniqid().$_FILES['image']['name'];
+			move_uploaded_file($_FILES['image']['tmp_name'],'img/'.$new_image);
+
+//			echo $new_image.'<br>';
 		}
-	} else {
-		can_upload_image($image);
 	}
 
 
 
 	if (!empty($_SESSION['name_edit_err']) or !empty($_SESSION['email_edit_err']) or !empty($_SESSION['image_edit_err'])){
-		//header('Location: /profile.php');
+		header('Location: /profile.php');
 	}
 	else {
 		$sql = "UPDATE users SET name=:name, email=:email, image=:image WHERE id=:id";
 		$statement = $pdo->prepare($sql);
 		$statement->bindParam(':id', $id);
-		$statement->bindParam(':name', $name);
-		$statement->bindParam(':email', $email);
-		$statement->bindParam(':image', $image_user);
+		$statement->bindParam(':name', $new_name);
+		$statement->bindParam(':email', $new_email);
+		$statement->bindParam(':image', $new_image);
 		$statement->execute();
 
-		setcookie('email_login', $email, time() + 3600);
-		setcookie('name_login', $name, time() + 3600);
+//		setcookie('email_login', $new_email, time() + 3600);
+//		setcookie('name_login', $new_name, time() + 3600);
+//		setcookie('id_login', $id, time() + 3600);
+//		setcookie('image_login', $new_image, time() + 3600);
+		$_SESSION['email_login'] = $new_email;
+		$_SESSION['name_login'] = $new_name;
+		$_SESSION['image_login'] = $new_image;
 
-		//header('Location: /profile.php');
+
+		header('Location: /profile.php');
 	}
 
-	var_dump($_SESSION);
-	var_dump($image);
-	echo $image_user;
+//	echo $new_image;
+//	echo '<br>';
+//	echo $image;
+//	echo '<br>';
+//	var_dump($_FILES);
+//	echo '<br>';
+//	var_dump($_SESSION);
+//	echo '<br>';
+//	var_dump(can_upload_image());
 
-
-	function can_upload_image($file){
+	function can_upload_image(){
+		$flag = false;
 		/* если размер файла 0, значит его не пропустили настройки
 		сервера из-за того, что он слишком большой */
-		if($file['size'] == 0){
+		if($_FILES['image']['size'] == 0){
 			$_SESSION['image_edit_err'] = 'Файл слишком большой.';
-			return $_SESSION['image_edit_err'];
+			$flag = false;
+			return $flag;
 		}
 
 		// разбиваем имя файла по точке и получаем массив
-		$getMime = explode('.', $file['name']);
+		$getMime = explode('.', $_FILES['image']['name']);
 		// нас интересует последний элемент массива - расширение
 		$mime = strtolower(end($getMime));
 		// объявим массив допустимых расширений
@@ -119,10 +127,12 @@
 		// если расширение не входит в список допустимых - return
 		if(!in_array($mime, $types)){
 			$_SESSION['image_edit_err'] = 'Недопустимый тип файла.';
-			return $_SESSION['image_edit_err'];
+			$flag = false;
+			return $flag;
 		}
 
-		return true;
+		$flag = true;
+		return $flag;
 	}
 
 ?>

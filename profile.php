@@ -35,6 +35,9 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                             <?php if(isset($_SESSION['authorization']) & $_SESSION['authorization']) {?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php">Комментарии</a>
+                            </li>
 							<li class="nav-item">
                                 <a class="nav-link" href="logout.php">Выйти</a>
                             </li>
@@ -59,37 +62,68 @@
                         <div class="card-header"><h3>Профиль пользователя</h3></div>
 
                         <div class="card-body">
+                        <? if (!isset($_SESSION['name_edit_err']) & !isset($_SESSION['email_edit_err']) & !isset($_SESSION['image_edit_err'])){?>
                           <div class="alert alert-success" role="alert">
                             Профиль успешно обновлен
                           </div>
-
+						<? } ?>
                             <form action="edit_profile.php" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-8">
 
 
-                                        <div class="form-group">
-                                            <label for="exampleFormControlInput1">Name</label>
-                                            <input type="text" class="form-control" name="name" id="exampleFormControlInput1" value="<?php echo $_COOKIE['name_login']; ?>">
+										<div class="form-group">
+											<? if (isset($_SESSION['name_edit_err'])){ ?>
+												<label for="exampleFormControlInput1">Email</label>
+                                            	<input type="text" class="form-control is-invalid" name="name" id="exampleFormControlInput1" value="<?php echo $_COOKIE['name_login']; ?>">
+                                            	<span class="text text-danger">
+                                                	<? echo $_SESSION['name_edit_err'];?>
+                                            	</span>
+											<? unset($_SESSION['name_edit_err']);} else { ?>
 
+                                            	<label for="exampleFormControlInput1">Name</label>
+                                            	<input type="text" class="form-control" name="name" id="exampleFormControlInput1" value="<?php echo $_COOKIE['name_login']; ?>">
+											<? } ?>
                                         </div>
 
 
+
+
                                         <div class="form-group">
-                                            <label for="exampleFormControlInput1">Email</label>
-                                            <input type="email" class="form-control is-invalid" name="email" id="exampleFormControlInput1" value="<?php echo $_COOKIE['email_login']; ?>">
-                                            <span class="text text-danger">
-                                                Ошибка валидации
+                                        	<? if (isset($_SESSION['email_edit_err'])){ ?>
+                                            	<label for="exampleFormControlInput1">Email</label>
+                                            	<input type="email" class="form-control is-invalid" name="email" id="exampleFormControlInput1" value="<?php echo $_COOKIE['email_login']; ?>">
+                                            	<span class="text text-danger">
+                                                	<? echo $_SESSION['email_edit_err'];?>
+                                            	</span>
+                                            	<? unset($_SESSION['email_edit_err']);} else { ?>
+                                            	<label for="exampleFormControlInput1">Email</label>
+                                            	<input type="email" class="form-control" name="email" id="exampleFormControlInput1" value="<?php echo $_COOKIE['email_login']; ?>">
+											<? } ?>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                        	<? if (isset($_SESSION['email_edit_err'])){ ?>
+											<label for="exampleFormControlInput1">Аватар</label>
+											<input type="file" class="form-control is-invalid" name="image" id="exampleFormControlInput1">
+											<span class="text text-danger">
+                                                	<? echo $_SESSION['image_edit_err'];?>
                                             </span>
-                                        </div>
+                                            <? unset($_SESSION['image_edit_err']);} else { ?>
 
-                                        <div class="form-group">
                                             <label for="exampleFormControlInput1">Аватар</label>
                                             <input type="file" class="form-control" name="image" id="exampleFormControlInput1">
+                                            <? } ?>
                                         </div>
+
+
+
+
                                     </div>
                                     <div class="col-md-4">
-                                        <img src="img/no-user.jpg" alt="" class="img-fluid">
+                                        <img src="<? echo "img/".$_SESSION['image_login']; ?>" alt="" class="img-fluid">
                                     </div>
 
                                     <div class="col-md-12">
