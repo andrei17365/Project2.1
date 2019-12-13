@@ -81,7 +81,7 @@
 
 									$pdo = new PDO($dsn, $db_user, $db_password, $options);
 
-									$sql = "SELECT comments.id as comments_id, comments.text as comments_text, comments.date as comments_date, comments.user_id as comments_user_id, users.id as users_id, users.name as users_name, users.email as users_email, users.password as users_password, users.image as users_image FROM comments LEFT JOIN users ON users.id=comments.user_id ORDER BY comments.id DESC";
+									$sql = "SELECT comments.id as comments_id, comments.text as comments_text, comments.date as comments_date, comments.user_id as comments_user_id, comments.hide as comments_hide, users.id as users_id, users.name as users_name, users.email as users_email, users.password as users_password, users.image as users_image FROM comments LEFT JOIN users ON users.id=comments.user_id ORDER BY comments.id DESC";
 
 									$statement = $pdo->prepare($sql);
 
@@ -101,6 +101,7 @@
 
 
                               <?php foreach ($result as $comment): ?>
+								<? if ($comment['comments_hide']==0){?>
                                 <div class="media">
                                   <img src="<?php echo 'img/'.$comment['users_image']; ?>" class="mr-3" alt="..." width="64" height="64">
                                   <div class="media-body">
@@ -111,6 +112,8 @@
                                     </p>
                                   </div>
                                 </div>
+                                <? } ?>
+
 							   <?php endforeach; ?>
 
                             </div>
