@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 13 2019 г., 12:32
+-- Время создания: Дек 13 2019 г., 21:38
 -- Версия сервера: 10.3.13-MariaDB-log
 -- Версия PHP: 7.1.32
 
@@ -33,7 +33,7 @@ CREATE TABLE `comments` (
   `text` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `user_id` int(11) NOT NULL,
-  `hide` int(8) NOT NULL
+  `hide` int(8) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
