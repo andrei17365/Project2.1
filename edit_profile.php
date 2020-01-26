@@ -1,23 +1,9 @@
 <?php
 	session_start();
 
-	$driver = 'mysql'; // тип базы данных, с которой мы будем работать
+	include 'functions.php';
+	$db = include 'database/start.php';
 
-	$host = 'localhost';// альтернатива '127.0.0.1' - адрес хоста, в нашем случае локального
-
-	$db_name = 'projectphp1'; // имя базы данных
-
-	$db_user = 'root'; // имя пользователя для базы данных
-
-	$db_password = ''; // пароль пользователя
-
-	$charset = 'utf8'; // кодировка по умолчанию
-
-	$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]; // массив с дополнительными настройками подключения. В данном примере мы установили отображение ошибок, связанных с базой данных, в виде исключений
-
-	$dsn = "$driver:host=$host;dbname=$db_name;charset=$charset";
-
-	$pdo = new PDO($dsn, $db_user, $db_password, $options);
 
 	unset($_SESSION['email_edit_err']);
 	unset($_SESSION['name_edit_err']);
@@ -32,6 +18,7 @@
 	$new_name = $_POST['name'];
 	$new_email = $_POST['email'];
 
+	$result = $db->getOne(users, ['email' => $email]);
 
 	if (empty($new_name)){
 		$_SESSION['name_edit_err'] = 'Введите имя';
@@ -43,11 +30,6 @@
 		if(!(filter_var($new_email, FILTER_VALIDATE_EMAIL))){
 			$_SESSION['email_edit_err'] = 'Формат почтового ящика неправильный';
 		} elseif ($new_email != $email){
-			$sql = "SELECT * FROM users WHERE email = :email";
-			$statement = $pdo->prepare($sql);
-			$statement->bindParam(':email', $email);
-			$statement->execute();
-			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 			if (isset($result[0]['email'])){
 				$_SESSION['email_edit_err'] = 'Этот почтовый ящик занят!';
 			}
@@ -77,18 +59,13 @@
 		header('Location: /profile.php');
 	}
 	else {
-		$sql = "UPDATE users SET name=:name, email=:email, image=:image WHERE id=:id";
-		$statement = $pdo->prepare($sql);
-		$statement->bindParam(':id', $id);
-		$statement->bindParam(':name', $new_name);
-		$statement->bindParam(':email', $new_email);
-		$statement->bindParam(':image', $new_image);
-		$statement->execute();
+		$db->update(users, [
+			'id' => $id,
+			'name' => $new_name,
+			'email' => $new_email,
+			'image' => $new_image
+		]);
 
-//		setcookie('email_login', $new_email, time() + 3600);
-//		setcookie('name_login', $new_name, time() + 3600);
-//		setcookie('id_login', $id, time() + 3600);
-//		setcookie('image_login', $new_image, time() + 3600);
 		$_SESSION['email_login'] = $new_email;
 		$_SESSION['name_login'] = $new_name;
 		$_SESSION['image_login'] = $new_image;
@@ -96,16 +73,6 @@
 
 		header('Location: /profile.php');
 	}
-
-//	echo $new_image;
-//	echo '<br>';
-//	echo $image;
-//	echo '<br>';
-//	var_dump($_FILES);
-//	echo '<br>';
-//	var_dump($_SESSION);
-//	echo '<br>';
-//	var_dump(can_upload_image());
 
 	function can_upload_image(){
 		$flag = false;

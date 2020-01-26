@@ -1,5 +1,3 @@
-<?php session_start(); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,62 +59,31 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header"><h3>Комментарии</h3></div>
+                                <div class="card-body">
 
-                            <?php
-									$driver = 'mysql'; // тип базы данных, с которой мы будем работать
-
-									$host = 'localhost';// альтернатива '127.0.0.1' - адрес хоста, в нашем случае локального
-
-									$db_name = 'projectphp1'; // имя базы данных
-
-									$db_user = 'root'; // имя пользователя для базы данных
-
-									$db_password = ''; // пароль пользователя
-
-									$charset = 'utf8'; // кодировка по умолчанию
-
-									$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]; // массив с дополнительными настройками подключения. В данном примере мы установили отображение ошибок, связанных с базой данных, в виде исключений
-
-									$dsn = "$driver:host=$host;dbname=$db_name;charset=$charset";
-
-									$pdo = new PDO($dsn, $db_user, $db_password, $options);
-
-									$sql = "SELECT comments.id as comments_id, comments.text as comments_text, comments.date as comments_date, comments.user_id as comments_user_id, comments.hide as comments_hide, users.id as users_id, users.name as users_name, users.email as users_email, users.password as users_password, users.image as users_image FROM comments LEFT JOIN users ON users.id=comments.user_id ORDER BY comments.id DESC";
-
-									$statement = $pdo->prepare($sql);
-
-									$statement->execute();
-
-									$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-							?>
-
-                            <div class="card-body">
-
-                            <?php if (isset($_SESSION['newcomment'])){?>
-                              <div class="alert alert-success" role="alert">
-                                <?php echo $_SESSION['newcomment']; ?>
-                              </div>
-                            <?php unset($_SESSION['newcomment']); }?>
+                                    <?php if (isset($_SESSION['newcomment'])){?>
+                                      <div class="alert alert-success" role="alert">
+                                        <?php echo $_SESSION['newcomment']; ?>
+                                      </div>
+                                    <?php unset($_SESSION['newcomment']); }?>
 
 
-                              <?php foreach ($result as $comment): ?>
-								<? if ($comment['comments_hide']==0){?>
-                                <div class="media">
-                                  <img src="<?php echo 'img/'.$comment['users_image']; ?>" class="mr-3" alt="..." width="64" height="64">
-                                  <div class="media-body">
-                                    <h5 class="mt-0"><?php echo $comment['users_name']; ?></h5>
-                                    <span><small><?php echo date("d/m/Y", strtotime($comment['comments_date'])); ?></small></span>
-                                    <p>
-                                        <?php echo $comment['comments_text']; ?>
-                                    </p>
-                                  </div>
+                                      <?php foreach ($comments as $comment): ?>
+        								<? if ($comment['hide']==0){?>
+                                        <div class="media">
+                                          <img src="<?php echo 'img/'.$comment['image']; ?>" class="mr-3" alt="..." width="64" height="64">
+                                          <div class="media-body">
+                                            <h5 class="mt-0"><?php echo $comment['name']; ?></h5>
+                                            <span><small><?php echo date("d/m/Y", strtotime($comment['date'])); ?></small></span>
+                                            <p>
+                                                <?php echo $comment['text']; ?>
+                                            </p>
+                                          </div>
+                                        </div>
+                                        <? } ?>
+
+        							   <?php endforeach; ?>
                                 </div>
-                                <? } ?>
-
-							   <?php endforeach; ?>
-
-                            </div>
                         </div>
                     </div>
 
@@ -127,10 +94,6 @@
 
                             <div class="card-body">
                                 <form action="comments.php" method="post">
-                                 <!--   <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Имя</label>
-                                    <input name="name" class="form-control" id="exampleFormControlTextarea1" />
-                                  	</div> -->
                                   <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Сообщение</label>
                                     <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>

@@ -1,23 +1,8 @@
 <?php
 	session_start();
 
-	$driver = 'mysql'; // тип базы данных, с которой мы будем работать
-
-	$host = 'localhost';// альтернатива '127.0.0.1' - адрес хоста, в нашем случае локального
-
-	$db_name = 'projectphp1'; // имя базы данных
-
-	$db_user = 'root'; // имя пользователя для базы данных
-
-	$db_password = ''; // пароль пользователя
-
-	$charset = 'utf8'; // кодировка по умолчанию
-
-	$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]; // массив с дополнительными настройками подключения. В данном примере мы установили отображение ошибок, связанных с базой данных, в виде исключений
-
-	$dsn = "$driver:host=$host;dbname=$db_name;charset=$charset";
-
-	$pdo = new PDO($dsn, $db_user, $db_password, $options);
+	//include 'functions.php';
+	$db = include 'database/start.php';
 
 	$_SESSION['authorization'] = false;
 
@@ -32,16 +17,11 @@
 	} else {
 		$email = $_POST['email'];
 		$password = $_POST['password'];
-
-		$sql = "SELECT * FROM users WHERE email = :email";
-		$statement = $pdo->prepare($sql);
-		$statement->bindParam(':email', $email);
-		$statement->execute();
-		$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-		$name = $result[0]['name'];
-		$id = $result[0]['id'];
-		$image = $result[0]['image'];
+		
+		$result = $db->getOne(users, ['email' => $email]);
+		$name = $result['name'];
+		$id = $result['id'];
+		$image = $result['image'];
 	}
 	if ($_POST['remember'] == 1) {
 			setcookie('email_login', $email, time() + 3600);
@@ -75,11 +55,7 @@
 			setcookie('image_login', '', time());
 		}
 		else {
-			$sql = "SELECT * FROM users WHERE email = :email";
-			$statement = $pdo->prepare($sql);
-			$statement->bindParam(':email', $email);
-			$statement->execute();
-			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+			$result = $db->getOne(users, ['email' => $email]);
 			if ($result==null){
 				$_SESSION['email_login_err'] = 'Пользователя с таким почтовым ящиком не зарегистрировано';
 				setcookie('email_login', '', time());
@@ -120,13 +96,9 @@
 		$_SESSION['id_login'] = $id;
 		$_SESSION['image_login'] = $image;
 
-		//setcookie('email_login', $email, time() + 3600);
-		//setcookie('pass_login', $password, time() + 3600);
-		//setcookie('name_login', $name, time() + 3600);
-		//setcookie('id_login', $id, time() + 3600);
-		header('Location: /index.php');
-		//var_dump($_SESSION);
-		//var_dump($_COOKIE);
+		
+		header('Location: /');
+		
 	}
 
 ?>
