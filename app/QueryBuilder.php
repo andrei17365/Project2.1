@@ -84,4 +84,24 @@ class QueryBuilder{
 		$sth->execute($delete->getBindValues());
 	}
 
+
+	public function getOne($table, $id){
+
+		$select = $this->queryFactory->newSelect();
+
+		$select->cols(['*']);
+
+		$select
+		    ->from($table)           	    
+		 	->where('id = :id')           
+		 	->bindValue('id', $id);   
+
+		$sth = $this->pdo->prepare($select->getStatement());
+		
+		$sth->execute($select->getBindValues());
+		
+		$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+		return $result;
+	}
 }

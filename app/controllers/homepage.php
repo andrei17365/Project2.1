@@ -4,4 +4,6 @@ use App\QueryBuilder;
 
 $db = new QueryBuilder;
 
-$db->delete('posts', 3);
+$post = $db->getOne('posts', 5);
+
+var_dump($post);
