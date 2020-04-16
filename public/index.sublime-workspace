@@ -1,0 +1,335 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"_",
+				"_SESSION"
+			],
+			[
+				"new",
+				"new_image\tabc"
+			],
+			[
+				"em",
+				"empty\tabc"
+			],
+			[
+				"sessi",
+				"session_start"
+			],
+			[
+				"read",
+				"readCookie\tabc"
+			],
+			[
+				"fl",
+				"floor"
+			],
+			[
+				"strto",
+				"strtotime"
+			],
+			[
+				"mk",
+				"mktime"
+			],
+			[
+				"co",
+				"country\tabc"
+			],
+			[
+				"sess",
+				"session_destroy"
+			],
+			[
+				"file_",
+				"file_get_contents"
+			],
+			[
+				"array_k",
+				"array_key_exists"
+			],
+			[
+				"n",
+				"numSpase\tabc"
+			],
+			[
+				"f",
+				"form\tTag"
+			],
+			[
+				"str_s",
+				"str_split"
+			],
+			[
+				"ex",
+				"explode"
+			],
+			[
+				"array_sum",
+				"array_sum"
+			],
+			[
+				"is",
+				"isEven\tabc"
+			],
+			[
+				"str_",
+				"str_split"
+			],
+			[
+				"su",
+				"subArr\tabc"
+			],
+			[
+				"array",
+				"arrayFill\tabc"
+			],
+			[
+				"va",
+				"var_dump"
+			],
+			[
+				"for",
+				"foreach\tforeach …"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"PackageResourceViewer: Open Resource",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 161.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/OSPanel/domains/ProjectPHP2/edit_profile.php",
+		"/D/OSPanel/domains/ProjectPHP2/database/QueryBuilder.php",
+		"/D/OSPanel/domains/ProjectPHP2/config.php",
+		"/D/OSPanel/domains/ProjectPHP2/public/index.php",
+		"/D/OSPanel/domains/ProjectPHP2/index.view.php",
+		"/D/OSPanel/domains/ProjectPHP1/admin.php",
+		"/D/OSPanel/domains/ProjectPHP1/edit_profile.php",
+		"/D/OSPanel/domains/ProjectPHP1/comments.php",
+		"/D/OSPanel/domains/ProjectPHP1/admin_del.php",
+		"/D/OSPanel/domains/ProjectPHP1/index.php",
+		"/D/OSPanel/domains/ProjectPHP1/css/app.css",
+		"/D/OSPanel/domains/ProjectPHP1/profile.php",
+		"/D/OSPanel/domains/ProjectPHP1/edit_profile_password.php",
+		"/D/OSPanel/domains/ProjectPHP1/register_new_user.php",
+		"/D/OSPanel/domains/ProjectPHP1/login_user.php",
+		"/D/OSPanel/domains/ProjectPHP1/register.php",
+		"/D/OSPanel/domains/ProjectPHP1/login.php",
+		"/D/OSPanel/domains/ProjectPHP1/NewUser.php",
+		"/D/OSPanel/domains/ProjectPHP1/logout.php",
+		"/D/OSPanel/domains/ProjectPHP1/profile.html",
+		"/D/OSPanel/domains/ProjectPHP1/index.html",
+		"/D/Pricurivatel13.07.19/pricurivatel.ru/public_html/wp-content/themes/twentyseventeen/404.php",
+		"/D/Pricurivatel13.07.19/pricurivatel.ru/public_html/wp-content/themes/treville/header.php",
+		"/D/Pricurivatel13.07.19/pricurivatel.ru/public_html/wp-admin/admin-header.php",
+		"/D/Pricurivatel13.07.19/pricurivatel.ru/public_html/wp-content/themes/twentyseventeen/template-parts/header/header-image.php",
+		"/D/OSPanel/domains/Project PHP 1/index.php",
+		"/D/OSPanel/domains/andrei17365/index.php",
+		"/D/Курс php/Проект/index.html",
+		"/D/OSPanel/domains/andrei17365/block4/lessons4.1.php",
+		"/D/OSPanel/domains/andrei17365/block4/lessons4.php",
+		"/D/OSPanel/domains/Project PHP 1/index.html",
+		"/D/OSPanel/domains/andrei17365/Project/index.php",
+		"/D/OSPanel/domains/andrei17365/block4/lessons3.php",
+		"/D/OSPanel/domains/andrei17365/block4/lessons2.php",
+		"/D/OSPanel/domains/andrei17365/block4/lessons1.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons5/lessons5.7/lessons5.7.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons5/lessons5.5.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons5/lessons5.6.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons5/lessons5.1.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons5/lessons5.4.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons5/lessons5.3.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons5/lessons5.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.9/next3.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.9/index.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.9/next2.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.9/next1.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.7/index.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.7/form.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.7/logout.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.6.1.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.6.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.5.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.4/test.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.4/index.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.3.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.2.2.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.2.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons4.1.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons3.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons2.php",
+		"/D/OSPanel/domains/andrei17365/block3/lessons1.php",
+		"/D/OSPanel/domains/andrei17365/block2/lessons10/lessons10.php",
+		"/D/OSPanel/domains/andrei17365/block2/lessons8/lessons8.php",
+		"/D/OSPanel/domains/andrei17365/block2/lessons7/lessons7.php",
+		"/D/OSPanel/domains/andrei17365/block2/lessons6/lessons6.php",
+		"/D/OSPanel/domains/andrei17365/block2/lessons5/lessons5.php",
+		"/D/OSPanel/domains/andrei17365/block2/lessons4/lessons4.php",
+		"/D/OSPanel/domains/andrei17365/block2/lessons3/lessons3.php",
+		"/D/OSPanel/domains/andrei17365/block2/lessons2/lessons2.php",
+		"/D/OSPanel/domains/andrei17365/block2/lessons1/lessons1.php"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "index.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 163.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
